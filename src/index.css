@@ -107,6 +107,31 @@ button {
   align-items: center;
 }
 
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+}
+
+.header-instagram-btn {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background-color: var(--card-bg);
+  border: 1px solid var(--border-cream);
+  color: var(--caramel);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  transition: all 0.2s;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.header-instagram-btn:active {
+  transform: scale(0.94);
+}
+
 .hamburger-btn {
   width: 44px;
   height: 44px;
@@ -126,26 +151,26 @@ button {
   transform: scale(0.94);
 }
 
-/* 3. Fullscreen Hamburger Menu */
+/* 3. Fullscreen Hamburger Menu (Initial warm cream color) */
 .fullscreen-menu {
   position: fixed;
   inset: 0;
   width: 100vw;
   height: 100vh;
   height: 100dvh;
-  background-color: #24140D;
-  color: #FFFDF9;
+  background-color: #F7F4EE;
+  color: var(--espresso-main);
   z-index: 99999;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   padding: 1.5rem 1.5rem 2rem 1.5rem;
   overflow-y: auto;
-  animation: fadeInMenu 0.25s ease-out;
+  animation: fadeInMenu 0.2s ease-out;
 }
 
 @keyframes fadeInMenu {
-  from { opacity: 0; transform: translateY(-10px); }
+  from { opacity: 0; transform: translateY(-8px); }
   to { opacity: 1; transform: translateY(0); }
 }
 
@@ -154,28 +179,28 @@ button {
   align-items: center;
   justify-content: space-between;
   padding-bottom: 1rem;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+  border-bottom: 1px solid var(--border-cream);
 }
 
 .close-menu-btn {
-  color: #FFFDF9;
-  padding: 0.4rem;
+  color: var(--espresso-main);
+  padding: 0.45rem;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: rgba(255, 255, 255, 0.1);
+  background-color: rgba(42, 24, 16, 0.06);
   transition: all 0.2s;
 }
 
 .close-menu-btn:active {
-  background-color: rgba(255, 255, 255, 0.25);
+  background-color: rgba(42, 24, 16, 0.15);
 }
 
 .fullscreen-nav {
   display: flex;
   flex-direction: column;
-  gap: 1.25rem;
+  gap: 1.1rem;
   margin: 2rem 0;
 }
 
@@ -186,10 +211,10 @@ button {
   font-family: var(--font-serif);
   font-size: 1.55rem;
   font-weight: 600;
-  color: #FFFDF9;
+  color: var(--espresso-main);
   text-align: left;
   padding: 0.85rem 0;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  border-bottom: 1px solid var(--border-cream);
   transition: color 0.2s;
   -webkit-tap-highlight-color: transparent;
 }
@@ -230,30 +255,24 @@ button {
 }
 
 .btn-gps {
-  background-color: var(--caramel);
-  color: #FFFFFF;
-  box-shadow: 0 4px 14px rgba(196, 124, 73, 0.3);
+  background-color: var(--espresso-main);
+  color: #FFFDF9;
+  box-shadow: 0 4px 14px rgba(42, 24, 16, 0.15);
 }
 
 .btn-whatsapp {
   background: linear-gradient(135deg, #25D366, #128C7E);
   color: #FFFFFF;
-  box-shadow: 0 4px 14px rgba(18, 140, 126, 0.3);
-}
-
-.btn-insta {
-  background-color: rgba(255, 255, 255, 0.12);
-  color: #FFFDF9;
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 4px 14px rgba(18, 140, 126, 0.25);
 }
 
 .fullscreen-footer {
   text-align: center;
   font-size: 0.78rem;
-  color: rgba(255, 255, 255, 0.6);
+  color: var(--espresso-light);
   line-height: 1.5;
   padding-top: 1rem;
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  border-top: 1px solid var(--border-cream);
 }
 
 /* Main Single-Column Content */

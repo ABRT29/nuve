@@ -101,34 +101,46 @@ export const App: React.FC = () => {
         </span>
       </div>
 
-      {/* 2. Main sticky Header with Logo + Hamburger */}
+      {/* 2. Main sticky Header with Logo + Instagram + Hamburger */}
       <header className="main-header">
         <div className="container header-container">
           <a href="#" className="header-logo">
             <NuveLogo variant="horizontal" size={38} />
           </a>
 
-          <button
-            onClick={() => setMenuOpen(true)}
-            className="hamburger-btn"
-            aria-label="Abrir menú"
-          >
-            <Menu size={28} />
-          </button>
+          <div className="header-actions">
+            <a
+              href={CAFE_INFO.instagramUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="header-instagram-btn"
+              aria-label="Instagram @nuve_cafe"
+            >
+              <InstagramIcon size={20} color="#C47C49" />
+            </a>
+
+            <button
+              onClick={() => setMenuOpen(true)}
+              className="hamburger-btn"
+              aria-label="Abrir menú"
+            >
+              <Menu size={28} />
+            </button>
+          </div>
         </div>
       </header>
 
-      {/* 3. Fullscreen Hamburger Menu Overlay */}
+      {/* 3. Fullscreen Hamburger Menu Overlay (Couleur initiale crème) */}
       {menuOpen && (
         <div className="fullscreen-menu">
           <div className="fullscreen-menu-header">
-            <NuveLogo variant="horizontal" size={36} light />
+            <NuveLogo variant="horizontal" size={36} />
             <button
               onClick={() => setMenuOpen(false)}
               className="close-menu-btn"
               aria-label="Cerrar menú"
             >
-              <X size={32} />
+              <X size={28} />
             </button>
           </div>
 
@@ -157,7 +169,7 @@ export const App: React.FC = () => {
               className="btn btn-gps"
             >
               <Navigation size={18} />
-              <span>Abrir en GPS (Google Maps)</span>
+              <span>Abrir en map</span>
             </a>
 
             <a
@@ -168,16 +180,6 @@ export const App: React.FC = () => {
             >
               <MessageCircle size={18} />
               <span>Pedir por WhatsApp</span>
-            </a>
-
-            <a
-              href={CAFE_INFO.instagramUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn btn-insta"
-            >
-              <InstagramIcon size={18} color="#FFFFFF" />
-              <span>Instagram @nuve_cafe</span>
             </a>
           </div>
 
@@ -301,7 +303,7 @@ export const App: React.FC = () => {
               className="btn btn-gps-full"
             >
               <Navigation size={17} />
-              <span>Abrir en Google Maps</span>
+              <span>Abrir en map</span>
             </a>
 
             <a
