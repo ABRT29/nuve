@@ -1,7 +1,9 @@
 import { MenuItem, SpecialtyItem } from '../types';
 
-// URL du Google Sheet exporté en CSV (configurable via variable d'environnement ou ici directement)
-export const GOOGLE_SHEET_CSV_URL = import.meta.env.VITE_GOOGLE_SHEET_CSV_URL || '';
+// URL du Google Sheet exporté en CSV
+export const GOOGLE_SHEET_CSV_URL =
+  import.meta.env.VITE_GOOGLE_SHEET_CSV_URL ||
+  'https://docs.google.com/spreadsheets/d/e/2PACX-1vSKgAvHEDrDr-4Us5pNLEw6DDpdRdpYqZXHPpgoT311f0Algor5UkcM9GRk83mXsKSaVeNDO0cUDQQZ/pub?output=csv';
 
 export const DEFAULT_MENU_ITEMS: MenuItem[] = [
   // Café Caliente
