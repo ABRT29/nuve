@@ -26,10 +26,10 @@ export const App: React.FC = () => {
   const [activeCategory, setActiveCategory] = useState<'caliente' | 'fria' | 'frappe' | 'comer'>('caliente');
   const [copied, setCopied] = useState(false);
 
-  // ZÉRO PRIX EN DUR : départ vide ou squelette opaque, alimenté uniquement par le Google Sheet
-  const [menuItems, setMenuItems] = useState<MenuItem[]>(DEFAULT_MENU_ITEMS);
-  const [specialties, setSpecialties] = useState<SpecialtyItem[]>(DEFAULT_SPECIALTIES);
-  const [isPricesLoaded, setIsPricesLoaded] = useState<boolean>(false);
+  // ZÉRO CONTENU EN DUR : squelette transparent tant que le Google Sheet charge
+  const [menuItems, setMenuItems] = useState<MenuItem[]>([]);
+  const [specialties, setSpecialties] = useState<SpecialtyItem[]>([]);
+  const [isLoaded, setIsLoaded] = useState<boolean>(false);
 
   // 1. Calcul dynamique Veracruz (UTC-6)
   useEffect(() => {
@@ -50,21 +50,44 @@ export const App: React.FC = () => {
     return () => clearInterval(interval);
   }, []);
 
-  // 2. Chargement direct des prix depuis Google Sheet
+  // 2. Chargement direct des données depuis Google Sheet avec fallback de secours après 3s
   useEffect(() => {
-    if (!GOOGLE_SHEET_CSV_URL) return;
+    if (!GOOGLE_SHEET_CSV_URL) {
+      setMenuItems(DEFAULT_MENU_ITEMS);
+      setSpecialties(DEFAULT_SPECIALTIES);
+      setIsLoaded(true);
+      return;
+    }
+
+    let isMounted = true;
 
     fetchMenuFromGoogleSheet(GOOGLE_SHEET_CSV_URL).then((result) => {
-      if (result) {
-        if (result.menu.length > 0) {
-          setMenuItems(result.menu);
-        }
-        if (result.specialties.length > 0) {
-          setSpecialties(result.specialties);
-        }
-        setIsPricesLoaded(true);
+      if (!isMounted) return;
+      if (result && result.menu.length > 0) {
+        setMenuItems(result.menu);
+        setSpecialties(result.specialties);
+        setIsLoaded(true);
+      } else {
+        // Fallback de secours si le sheet est vide
+        setMenuItems(DEFAULT_MENU_ITEMS);
+        setSpecialties(DEFAULT_SPECIALTIES);
+        setIsLoaded(true);
       }
     });
+
+    // Sécurité : si le réseau est très lent, affiche le fallback après 3s max
+    const timer = setTimeout(() => {
+      if (isMounted && !isLoaded) {
+        setMenuItems((prev) => (prev.length > 0 ? prev : DEFAULT_MENU_ITEMS));
+        setSpecialties((prev) => (prev.length > 0 ? prev : DEFAULT_SPECIALTIES));
+        setIsLoaded(true);
+      }
+    }, 3000);
+
+    return () => {
+      isMounted = false;
+      clearTimeout(timer);
+    };
   }, []);
 
   // Bloque le défilement quand le menu plein écran est ouvert
@@ -248,26 +271,37 @@ export const App: React.FC = () => {
             ))}
           </div>
 
-          {/* Items List */}
+          {/* Items List (Squelette transparent si pas encore chargé, sinon champs Google Sheet) */}
           <div className="items-list">
-            {currentItems.map((item) => (
-              <div key={item.id} className="menu-row">
-                <div className="menu-row-info">
-                  <div className="menu-row-title">
-                    <span className="item-name">{item.name}</span>
-                    {item.popular && <span className="item-star">★ Favorito</span>}
-                    {item.badge && !item.popular && <span className="item-badge">{item.badge}</span>}
+            {!isLoaded ? (
+              [1, 2, 3, 4, 5].map((i) => (
+                <div key={i} className="menu-row">
+                  <div className="menu-row-info">
+                    <div className="menu-row-title">
+                      <div className="skeleton-box skeleton-title" />
+                      {i % 2 === 0 && <div className="skeleton-box skeleton-tag" />}
+                    </div>
+                    <div className="skeleton-box skeleton-desc" />
+                    <div className="skeleton-box skeleton-desc-sub" />
                   </div>
-                  <p className="item-desc">{item.description}</p>
+                  <div className="skeleton-box skeleton-price" />
                 </div>
-                {/* Carré opaque de chargement tant que le prix n'est pas reçu de Google Sheet */}
-                {isPricesLoaded && item.price ? (
+              ))
+            ) : (
+              currentItems.map((item) => (
+                <div key={item.id} className="menu-row">
+                  <div className="menu-row-info">
+                    <div className="menu-row-title">
+                      <span className="item-name">{item.name}</span>
+                      {item.popular && <span className="item-star">★ Favorito</span>}
+                      {item.badge && !item.popular && <span className="item-badge">{item.badge}</span>}
+                    </div>
+                    {item.description && <p className="item-desc">{item.description}</p>}
+                  </div>
                   <div className="item-price">{item.price}</div>
-                ) : (
-                  <div className="price-skeleton" aria-label="Cargando precio" />
-                )}
-              </div>
-            ))}
+                </div>
+              ))
+            )}
           </div>
         </section>
 
@@ -279,21 +313,29 @@ export const App: React.FC = () => {
           </div>
 
           <div className="specialties-list">
-            {specialties.map((spec, idx) => (
-              <div key={idx} className="specialty-item">
-                <div className="specialty-top">
-                  <span className="specialty-name">{spec.name}</span>
-                  {/* Carré opaque de chargement pour les spécialités */}
-                  {isPricesLoaded && spec.price ? (
-                    <span className="specialty-price">{spec.price}</span>
-                  ) : (
-                    <span className="price-skeleton-sm" aria-label="Cargando precio" />
-                  )}
+            {!isLoaded ? (
+              [1, 2, 3, 4].map((i) => (
+                <div key={i} className="specialty-item">
+                  <div className="specialty-top">
+                    <div className="skeleton-box skeleton-spec-title" />
+                    <div className="skeleton-box skeleton-price" />
+                  </div>
+                  <div className="skeleton-box skeleton-tag" style={{ margin: '0.4rem 0' }} />
+                  <div className="skeleton-box skeleton-desc" />
                 </div>
-                <span className="specialty-tag">{spec.tag}</span>
-                <p className="specialty-desc">{spec.desc}</p>
-              </div>
-            ))}
+              ))
+            ) : (
+              specialties.map((spec, idx) => (
+                <div key={idx} className="specialty-item">
+                  <div className="specialty-top">
+                    <span className="specialty-name">{spec.name}</span>
+                    <span className="specialty-price">{spec.price}</span>
+                  </div>
+                  <span className="specialty-tag">{spec.tag}</span>
+                  <p className="specialty-desc">{spec.desc}</p>
+                </div>
+              ))
+            )}
           </div>
         </section>
 

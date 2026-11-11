@@ -331,7 +331,7 @@ button {
 
 .banner-sep {
   color: rgba(255, 255, 255, 0.4);
-  font-size: 0.65rem;
+  font-size: 0.8rem;
   flex-shrink: 0;
 }
 
@@ -469,29 +469,53 @@ button {
   white-space: nowrap;
 }
 
-/* Carré opaque de chargement pour les prix */
-.price-skeleton {
-  width: 48px;
-  height: 24px;
+/* SKELETON LOADERS (Subtils et semi-transparents) */
+.skeleton-box {
+  background-color: rgba(42, 24, 16, 0.07);
   border-radius: 6px;
-  background-color: #E8DFD3;
-  animation: pulseSkeleton 1.4s ease-in-out infinite;
-  flex-shrink: 0;
-}
-
-.price-skeleton-sm {
-  width: 40px;
-  height: 20px;
-  border-radius: 5px;
-  background-color: #E8DFD3;
-  animation: pulseSkeleton 1.4s ease-in-out infinite;
-  display: inline-block;
-  flex-shrink: 0;
+  animation: pulseSkeleton 1.6s ease-in-out infinite;
 }
 
 @keyframes pulseSkeleton {
-  0%, 100% { opacity: 0.55; }
-  50% { opacity: 0.95; }
+  0%, 100% { opacity: 0.35; }
+  50% { opacity: 0.75; }
+}
+
+.skeleton-title {
+  width: 110px;
+  height: 18px;
+}
+
+.skeleton-tag {
+  width: 55px;
+  height: 16px;
+  border-radius: 999px;
+}
+
+.skeleton-desc {
+  width: 88%;
+  height: 12px;
+  margin-top: 6px;
+  border-radius: 4px;
+}
+
+.skeleton-desc-sub {
+  width: 62%;
+  height: 12px;
+  margin-top: 4px;
+  border-radius: 4px;
+}
+
+.skeleton-price {
+  width: 44px;
+  height: 22px;
+  border-radius: 6px;
+  flex-shrink: 0;
+}
+
+.skeleton-spec-title {
+  width: 140px;
+  height: 18px;
 }
 
 /* Especialidades Card */
