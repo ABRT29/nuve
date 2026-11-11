@@ -1,0 +1,19 @@
+categoria,nombre,precio,descripcion,etiqueta,favorito,especialidad
+caliente,Americano,$35,Expreso con granos 100% mexicanos de especialidad y agua caliente.,Clásico,no,no
+caliente,Latte,$48,Expreso doble con leche vaporizada y fina capa de microespuma sedosa.,,si,no
+caliente,Capuchino,$50,La armonía tradicional de expreso aromático y abundante espuma aterciopelada.,Favorito,no,no
+caliente,Moka,$55,Café de especialidad fundido con cacao mexicano y leche texturizada.,,no,no
+caliente,Chai Sugar Free,$52,Mezcla artesanal de especias con leche caliente sin azúcar agregada.,Sin Azúcar,no,no
+fria,Iced Coffee,$42,Café preparado al momento vertido sobre cubos de hielo. Fresco y limpio.,Refrescante,no,no
+fria,Latte Frío,$50,Doble shot de expreso servido sobre leche fría con hielo cristalino.,,no,no
+fria,Latte Caramelo Frío,$55,Café latte sobre hielo con jarabe de caramelo artesanal y notas tostadas.,Top Seller,si,si
+fria,Moka Latte Frío,$58,Café expreso salsa de cacao selecto y leche bien fría batida suavemente.,,no,no
+fria,Chai Frío Sugar Free,$52,Infusión especiada con leche fría y hielo sin azúcar.,Sin Azúcar,no,no
+frappe,Frappé de Mazapán,$65,Cremoso frappé con auténtico dulce de cacahuate mexicano y lluvia de mazapán.,Insignia Nuvé,si,si
+frappe,Frappé de Oreo,$65,Base cremosa con galletas Oreo trituradas jarabe de chocolate y crema.,Irresistible,no,no
+frappe,Frappé de Moka,$65,Intenso café de especialidad licuado con chocolate y hielo estilo frozen.,,no,no
+frappe,Frappé de Nutella,$68,Frappé ultra cremoso con generosa crema de avellanas con cacao.,Delicia,no,no
+comer,Torta de Elote Casera,$45,Bien suave húmeda y hecha con mucho amor casero tradicional.,Receta de Hogar,si,si
+comer,Pay de Jamón con Queso,$48,Rebanada dorada de masa crujiente rellena de jamón selecto y queso.,Salado Calientito,no,si
+comer,Torta Nuvé,$60,Especialidad de la barra en pan artesanal con ingredientes frescos.,Para el Antojo,no,no
+comer,Croissant Mantequilla,$38,Hojaldre ligero y crujiente con aroma a mantequilla dorada.,,no,no

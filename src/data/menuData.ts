@@ -1,6 +1,9 @@
-import { MenuItem } from '../types';
+import { MenuItem, SpecialtyItem } from '../types';
 
-export const MENU_ITEMS: MenuItem[] = [
+// URL du Google Sheet exporté en CSV (configurable via variable d'environnement ou ici directement)
+export const GOOGLE_SHEET_CSV_URL = import.meta.env.VITE_GOOGLE_SHEET_CSV_URL || '';
+
+export const DEFAULT_MENU_ITEMS: MenuItem[] = [
   // Café Caliente
   {
     id: 'cal-americano',
@@ -152,6 +155,33 @@ export const MENU_ITEMS: MenuItem[] = [
   }
 ];
 
+export const DEFAULT_SPECIALTIES: SpecialtyItem[] = [
+  {
+    name: 'Frappé de Mazapán',
+    tag: 'Insignia Nuvé',
+    desc: 'Cremoso, con auténtico dulce de cacahuate mexicano.',
+    price: '$65'
+  },
+  {
+    name: 'Torta de Elote Casera',
+    tag: 'Receta de Hogar',
+    desc: 'Bien suave, húmeda y hecha con mucho amor.',
+    price: '$45'
+  },
+  {
+    name: 'Pay de Jamón con Queso',
+    tag: 'Salado Calientito',
+    desc: 'Masa crujiente hojaldrada y queso fundido.',
+    price: '$48'
+  },
+  {
+    name: 'Latte Caramelo Frío',
+    tag: 'Refrescante',
+    desc: 'Espresso selecto, leche fría y caramelo artesanal.',
+    price: '$55'
+  }
+];
+
 export const CAFE_INFO = {
   name: 'Nuvé Café',
   tagline: 'Café con alma',
@@ -160,29 +190,7 @@ export const CAFE_INFO = {
   address: 'José Azueta 108, El Coyol, Veracruz, Ver., México',
   instagram: 'nuve_cafe',
   instagramUrl: 'https://www.instagram.com/nuve_cafe/',
-  whatsappNumber: '+522290000000', // Format standard international
+  whatsappNumber: '+522290000000',
   whatsappMessage: '¡Hola Nuvé Café! Me gustaría consultar el menú del día y hacer un pedido para recoger.',
-  googleMapsUrl: 'https://maps.google.com/?q=José+Azueta+108+El+Coyol+Veracruz',
-  schedule: {
-    weekdays: 'Lunes a Sábado: 8:00 AM – 8:00 PM',
-    sunday: 'Domingo: Descanso'
-  },
-  highlights: [
-    {
-      title: 'Café de Especialidad 🇲🇽',
-      desc: 'Granos 100% de origen mexicano seleccionados por su perfil aromático y tostado óptimo.'
-    },
-    {
-      title: 'Al Momento',
-      desc: 'Cada bebida se extrae y prepara al instante frente a ti con la mayor frescura.'
-    },
-    {
-      title: 'Hecho con Amor',
-      desc: 'Repostería casera horneada con cariño: torta de elote suave, pays crujientes y más.'
-    },
-    {
-      title: 'Tu Esquina Favorita',
-      desc: 'Un espacio cálido y cercano en El Coyol para consentirte todos los días.'
-    }
-  ]
+  googleMapsUrl: 'https://maps.google.com/?q=José+Azueta+108+El+Coyol+Veracruz'
 };

@@ -1,19 +1,18 @@
-export type MenuCategory = 'all' | 'caliente' | 'fria' | 'frappe' | 'comer';
+export type MenuCategory = 'caliente' | 'fria' | 'frappe' | 'comer';
 
 export interface MenuItem {
   id: string;
   name: string;
-  category: 'caliente' | 'fria' | 'frappe' | 'comer';
+  category: MenuCategory;
   description: string;
   price: string;
   badge?: string;
   popular?: boolean;
 }
 
-export interface Review {
-  id: string;
-  author: string;
-  rating: number;
-  comment: string;
-  date: string;
+export interface SpecialtyItem {
+  name: string;
+  tag: string;
+  desc: string;
+  price: string;
 }

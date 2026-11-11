@@ -16,7 +16,9 @@ import {
 } from 'lucide-react';
 import { NuveLogo } from './components/NuveLogo';
 import { InstagramIcon } from './components/InstagramIcon';
-import { MENU_ITEMS, CAFE_INFO } from './data/menuData';
+import { MenuItem, SpecialtyItem } from './types';
+import { DEFAULT_MENU_ITEMS, DEFAULT_SPECIALTIES, CAFE_INFO, GOOGLE_SHEET_CSV_URL } from './data/menuData';
+import { fetchMenuFromGoogleSheet } from './utils/sheetLoader';
 
 export const App: React.FC = () => {
   const [isOpenNow, setIsOpenNow] = useState<boolean>(true);
@@ -24,7 +26,11 @@ export const App: React.FC = () => {
   const [activeCategory, setActiveCategory] = useState<'caliente' | 'fria' | 'frappe' | 'comer'>('caliente');
   const [copied, setCopied] = useState(false);
 
-  // Check Mexico Central Time (UTC-6) for Veracruz
+  // Menu & Spécialités (alimentés en direct par Google Sheet ou fallback par défaut)
+  const [menuItems, setMenuItems] = useState<MenuItem[]>(DEFAULT_MENU_ITEMS);
+  const [specialties, setSpecialties] = useState<SpecialtyItem[]>(DEFAULT_SPECIALTIES);
+
+  // 1. Calcul dynamique Veracruz (UTC-6)
   useEffect(() => {
     const checkStatus = () => {
       try {
@@ -43,7 +49,19 @@ export const App: React.FC = () => {
     return () => clearInterval(interval);
   }, []);
 
-  // Lock body scroll when fullscreen menu is open
+  // 2. Chargement en direct du Google Sheet (si configuré)
+  useEffect(() => {
+    if (!GOOGLE_SHEET_CSV_URL) return;
+
+    fetchMenuFromGoogleSheet(GOOGLE_SHEET_CSV_URL).then((result) => {
+      if (result) {
+        if (result.menu.length > 0) setMenuItems(result.menu);
+        if (result.specialties.length > 0) setSpecialties(result.specialties);
+      }
+    });
+  }, []);
+
+  // Bloque le défilement quand le menu plein écran est ouvert
   useEffect(() => {
     if (menuOpen) {
       document.body.style.overflow = 'hidden';
@@ -75,14 +93,7 @@ export const App: React.FC = () => {
     { id: 'comer', label: 'Comer', icon: <Utensils size={15} /> }
   ] as const;
 
-  const currentItems = MENU_ITEMS.filter((item) => item.category === activeCategory);
-
-  const specialties = [
-    { name: 'Frappé de Mazapán', tag: 'Insignia Nuvé', desc: 'Cremoso, con auténtico dulce de cacahuate mexicano.', price: '$65' },
-    { name: 'Torta de Elote Casera', tag: 'Receta de Hogar', desc: 'Bien suave, húmeda y hecha con mucho amor.', price: '$45' },
-    { name: 'Pay de Jamón con Queso', tag: 'Salado Calientito', desc: 'Masa crujiente hojaldrada y queso fundido.', price: '$48' },
-    { name: 'Latte Caramelo Frío', tag: 'Refrescante', desc: 'Espresso selecto, leche fría y caramelo artesanal.', price: '$55' }
-  ];
+  const currentItems = menuItems.filter((item) => item.category === activeCategory);
 
   return (
     <div className="nuve-layout">
@@ -192,7 +203,7 @@ export const App: React.FC = () => {
 
       {/* Main Single-Column Content */}
       <main className="content-container">
-        {/* Bandeau Vert Sauge inspiré de la pancarte du stand */}
+        {/* Bandeau Vert Sauge du stand (1 seule ligne) */}
         <div className="stand-green-banner">
           <div className="banner-item">
             <span className="banner-emoji">🌿</span>
