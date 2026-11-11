@@ -20,15 +20,41 @@ import { MenuItem, SpecialtyItem } from './types';
 import { DEFAULT_MENU_ITEMS, DEFAULT_SPECIALTIES, CAFE_INFO, GOOGLE_SHEET_CSV_URL } from './data/menuData';
 import { fetchMenuFromGoogleSheet } from './utils/sheetLoader';
 
+const CACHE_MENU_KEY = 'nuve_menu_cache_v1';
+const CACHE_SPEC_KEY = 'nuve_spec_cache_v1';
+
+// Récupération instantanée du cache local pour éviter le clignotement de l'ancien prix
+const getInitialMenu = (): MenuItem[] => {
+  try {
+    const cached = localStorage.getItem(CACHE_MENU_KEY);
+    if (cached) {
+      const parsed = JSON.parse(cached);
+      if (Array.isArray(parsed) && parsed.length > 0) return parsed;
+    }
+  } catch {}
+  return DEFAULT_MENU_ITEMS;
+};
+
+const getInitialSpecialties = (): SpecialtyItem[] => {
+  try {
+    const cached = localStorage.getItem(CACHE_SPEC_KEY);
+    if (cached) {
+      const parsed = JSON.parse(cached);
+      if (Array.isArray(parsed) && parsed.length > 0) return parsed;
+    }
+  } catch {}
+  return DEFAULT_SPECIALTIES;
+};
+
 export const App: React.FC = () => {
   const [isOpenNow, setIsOpenNow] = useState<boolean>(true);
   const [menuOpen, setMenuOpen] = useState(false);
   const [activeCategory, setActiveCategory] = useState<'caliente' | 'fria' | 'frappe' | 'comer'>('caliente');
   const [copied, setCopied] = useState(false);
 
-  // Menu & Spécialités (alimentés en direct par Google Sheet ou fallback par défaut)
-  const [menuItems, setMenuItems] = useState<MenuItem[]>(DEFAULT_MENU_ITEMS);
-  const [specialties, setSpecialties] = useState<SpecialtyItem[]>(DEFAULT_SPECIALTIES);
+  // Menu & Spécialités (démarrage instantané depuis le cache local)
+  const [menuItems, setMenuItems] = useState<MenuItem[]>(getInitialMenu);
+  const [specialties, setSpecialties] = useState<SpecialtyItem[]>(getInitialSpecialties);
 
   // 1. Calcul dynamique Veracruz (UTC-6)
   useEffect(() => {
@@ -49,14 +75,24 @@ export const App: React.FC = () => {
     return () => clearInterval(interval);
   }, []);
 
-  // 2. Chargement en direct du Google Sheet (si configuré)
+  // 2. Synchronisation arrière-plan Google Sheet + mise à jour du cache
   useEffect(() => {
     if (!GOOGLE_SHEET_CSV_URL) return;
 
     fetchMenuFromGoogleSheet(GOOGLE_SHEET_CSV_URL).then((result) => {
       if (result) {
-        if (result.menu.length > 0) setMenuItems(result.menu);
-        if (result.specialties.length > 0) setSpecialties(result.specialties);
+        if (result.menu.length > 0) {
+          setMenuItems(result.menu);
+          try {
+            localStorage.setItem(CACHE_MENU_KEY, JSON.stringify(result.menu));
+          } catch {}
+        }
+        if (result.specialties.length > 0) {
+          setSpecialties(result.specialties);
+          try {
+            localStorage.setItem(CACHE_SPEC_KEY, JSON.stringify(result.specialties));
+          } catch {}
+        }
       }
     });
   }, []);

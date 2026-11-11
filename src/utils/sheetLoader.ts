@@ -33,7 +33,9 @@ export async function fetchMenuFromGoogleSheet(csvUrl: string): Promise<{
   if (!csvUrl) return null;
 
   try {
-    const response = await fetch(csvUrl, { cache: 'no-cache' });
+    // Évite le cache intermédiaire pour avoir les modifications immédiatement
+    const url = `${csvUrl}${csvUrl.includes('?') ? '&' : '?'}_t=${Date.now()}`;
+    const response = await fetch(url, { cache: 'no-store' });
     if (!response.ok) {
       console.warn('Impossible de charger le Google Sheet (statut:', response.status, ')');
       return null;
