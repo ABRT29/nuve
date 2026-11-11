@@ -16,6 +16,7 @@ import {
 } from 'lucide-react';
 import { NuveLogo } from './components/NuveLogo';
 import { InstagramIcon } from './components/InstagramIcon';
+import { BotanicalBranch } from './components/BotanicalBranch';
 import { MENU_ITEMS, CAFE_INFO } from './data/menuData';
 
 export const App: React.FC = () => {
@@ -86,7 +87,7 @@ export const App: React.FC = () => {
 
   return (
     <div className="nuve-layout">
-      {/* 1. SEUL BANDEAU MARRON FONCÉ : statut d'ouverture dynamique */}
+      {/* 1. SEUL BANDEAU MARRON FONCÉ (Spécial iOS Status Bar) */}
       <div className="top-status-bar">
         <Heart
           size={13}
@@ -184,6 +185,9 @@ export const App: React.FC = () => {
           </div>
 
           <div className="fullscreen-footer">
+            <div className="botanical-center">
+              <BotanicalBranch width={50} height={28} />
+            </div>
             <p>📍 José Azueta 108, El Coyol, Veracruz</p>
             <p>Café con alma • Hecho con amor</p>
           </div>
@@ -195,7 +199,11 @@ export const App: React.FC = () => {
         {/* Le Menu Express */}
         <section id="carta" className="menu-card">
           <div className="menu-header">
-            <h2>La Carta</h2>
+            <div className="title-with-leaves">
+              <BotanicalBranch width={36} height={22} />
+              <h2>La Carta</h2>
+              <BotanicalBranch width={36} height={22} flip />
+            </div>
             <span className="menu-subtitle">Preparado al momento</span>
           </div>
 
@@ -229,12 +237,23 @@ export const App: React.FC = () => {
               </div>
             ))}
           </div>
+
+          {/* Botanical footer strip (inspiré de la banderole du comptoir) */}
+          <div className="botanical-strip">
+            <span>🌿 Al Momento</span>
+            <span>❄️ Bebidas Frías</span>
+            <span>🤍 Hecho en Casa</span>
+          </div>
         </section>
 
         {/* Especialidades del Momento */}
         <section id="especialidades" className="specialties-card">
           <div className="specialties-header">
-            <h2>Especialidades del Momento</h2>
+            <div className="title-with-leaves">
+              <BotanicalBranch width={32} height={20} />
+              <h2>Especialidades del Momento</h2>
+              <BotanicalBranch width={32} height={20} flip />
+            </div>
             <p>Nuestros consentidos horneados y batidos con pasión</p>
           </div>
 
@@ -312,6 +331,9 @@ export const App: React.FC = () => {
 
         {/* Footer */}
         <footer className="footer-compact">
+          <div className="botanical-center" style={{ marginBottom: '0.4rem' }}>
+            <BotanicalBranch width={44} height={24} />
+          </div>
           <p className="footer-tagline">Café con alma • Hecho con amor</p>
           <div className="footer-meta">
             <span>© {new Date().getFullYear()} Nuvé Café</span>
