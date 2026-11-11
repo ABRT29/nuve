@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <circle cx="50" cy="50" r="48" fill="#F7F4EE" stroke="#E3DCD0" stroke-width="2"/>
+  <!-- Sparkle / Plus -->
+  <path d="M50 21 V27 M47 24 H53" stroke="#3D271D" stroke-width="2" stroke-linecap="round"/>
+  <!-- Cloud / Steam Swirl -->
+  <path d="M42 33 C39 31, 39 27, 44 26 C47 24, 53 24, 55 27 C59 26, 62 29, 60 33 C58 35, 44 36, 42 33 Z" fill="none" stroke="#3D271D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Coffee Cup Outline -->
+  <path d="M35 40 H65 V51 C65 59 58 65 50 65 C42 65 35 59 35 51 Z" fill="none" stroke="#3D271D" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Cup Handle -->
+  <path d="M65 44 C70 44, 73 47, 73 51 C73 55, 70 58, 65 58" fill="none" stroke="#3D271D" stroke-width="2.2" stroke-linecap="round"/>
+  <!-- Saucer / Base -->
+  <path d="M32 69 H68" stroke="#3D271D" stroke-width="2.2" stroke-linecap="round"/>
+  <!-- Little heart below -->
+  <path d="M50 78 C50 78 47 75 45 73.5 C43 72 43 70 45 68.5 C47 67 49 68 50 69.5 C51 68 53 67 55 68.5 C57 70 57 72 55 73.5 C53 75 50 78 50 78 Z" fill="#C47C49"/>
+</svg>
