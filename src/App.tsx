@@ -86,20 +86,20 @@ export const App: React.FC = () => {
 
   return (
     <div className="nuve-layout">
-      {/* BANDEAU EN HAUT MARRON FONCÉ (Sticky, regroupe le statut Veracruz et le header) */}
+      {/* BANDEAU EN HAUT MARRON FONCÉ (Sticky) */}
       <div className="top-bandeau-wrapper">
-        {/* Barre de statut avec cœur vert ou rouge selon l'heure de Veracruz */}
+        {/* Barre de statut tenant strictement sur une seule ligne */}
         <div className="top-status-bar">
           <Heart
-            size={14}
+            size={13}
             color={isOpenNow ? '#22C55E' : '#EF4444'}
             fill={isOpenNow ? '#22C55E' : '#EF4444'}
             className="status-heart"
           />
           <span className="status-text">
             {isOpenNow
-              ? '¡El café está listo para recibirte! • Abierto hoy hasta las 8:00 PM'
-              : 'El café está cerrado por ahora • Listos para recibirte mañana a las 8:00 AM'}
+              ? '¡Listos para recibirte! • Abierto hasta 8:00 PM'
+              : 'Cerrado por ahora • Abre a las 8:00 AM'}
           </span>
         </div>
 
@@ -193,16 +193,8 @@ export const App: React.FC = () => {
         </div>
       )}
 
-      {/* Main Single-Column Content */}
+      {/* Main Single-Column Content (Directement sur la carte sans intro préalable) */}
       <main className="content-container">
-        {/* Hero Badge & Intro */}
-        <section className="intro-card">
-          <NuveLogo variant="badge" size={120} />
-          <h1 className="intro-title">nuvé <span>CAFÉ</span></h1>
-          <p className="intro-tagline">Café con alma • Barra xpress</p>
-          <p className="intro-address">📍 José Azueta 108, El Coyol, Veracruz</p>
-        </section>
-
         {/* Le Menu Express (Version 2 layout: tabs + clean rows) */}
         <section id="carta" className="menu-card">
           <div className="menu-header">
