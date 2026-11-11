@@ -86,61 +86,64 @@ export const App: React.FC = () => {
 
   return (
     <div className="nuve-layout">
-      {/* 1. Top dark brown bar with dynamic heart & Veracruz status */}
-      <div className="top-status-bar">
-        <Heart
-          size={14}
-          color={isOpenNow ? '#22C55E' : '#EF4444'}
-          fill={isOpenNow ? '#22C55E' : '#EF4444'}
-          className="status-heart"
-        />
-        <span className="status-text">
-          {isOpenNow
-            ? '¡El café está listo para recibirte! • Abierto hoy hasta las 8:00 PM'
-            : 'El café está cerrado por ahora • Listos para recibirte mañana a las 8:00 AM'}
-        </span>
-      </div>
+      {/* BANDEAU EN HAUT MARRON FONCÉ (Sticky, regroupe le statut Veracruz et le header) */}
+      <div className="top-bandeau-wrapper">
+        {/* Barre de statut avec cœur vert ou rouge selon l'heure de Veracruz */}
+        <div className="top-status-bar">
+          <Heart
+            size={14}
+            color={isOpenNow ? '#22C55E' : '#EF4444'}
+            fill={isOpenNow ? '#22C55E' : '#EF4444'}
+            className="status-heart"
+          />
+          <span className="status-text">
+            {isOpenNow
+              ? '¡El café está listo para recibirte! • Abierto hoy hasta las 8:00 PM'
+              : 'El café está cerrado por ahora • Listos para recibirte mañana a las 8:00 AM'}
+          </span>
+        </div>
 
-      {/* 2. Main sticky Header with Logo + Instagram + Hamburger */}
-      <header className="main-header">
-        <div className="container header-container">
-          <a href="#" className="header-logo">
-            <NuveLogo variant="horizontal" size={38} />
-          </a>
-
-          <div className="header-actions">
-            <a
-              href={CAFE_INFO.instagramUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="header-instagram-btn"
-              aria-label="Instagram @nuve_cafe"
-            >
-              <InstagramIcon size={20} color="#C47C49" />
+        {/* Header avec Logo + Instagram + Hamburger dans le bandeau marron */}
+        <header className="main-header">
+          <div className="container header-container">
+            <a href="#" className="header-logo">
+              <NuveLogo variant="horizontal" size={38} light={true} />
             </a>
 
-            <button
-              onClick={() => setMenuOpen(true)}
-              className="hamburger-btn"
-              aria-label="Abrir menú"
-            >
-              <Menu size={28} />
-            </button>
-          </div>
-        </div>
-      </header>
+            <div className="header-actions">
+              <a
+                href={CAFE_INFO.instagramUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="header-instagram-btn"
+                aria-label="Instagram @nuve_cafe"
+              >
+                <InstagramIcon size={20} color="#C47C49" />
+              </a>
 
-      {/* 3. Fullscreen Hamburger Menu Overlay (Couleur initiale crème) */}
+              <button
+                onClick={() => setMenuOpen(true)}
+                className="hamburger-btn"
+                aria-label="Abrir menú"
+              >
+                <Menu size={26} color="#FFFDF9" />
+              </button>
+            </div>
+          </div>
+        </header>
+      </div>
+
+      {/* Fullscreen Hamburger Menu Overlay */}
       {menuOpen && (
         <div className="fullscreen-menu">
           <div className="fullscreen-menu-header">
-            <NuveLogo variant="horizontal" size={36} />
+            <NuveLogo variant="horizontal" size={36} light={true} />
             <button
               onClick={() => setMenuOpen(false)}
               className="close-menu-btn"
               aria-label="Cerrar menú"
             >
-              <X size={28} />
+              <X size={28} color="#FFFDF9" />
             </button>
           </div>
 
