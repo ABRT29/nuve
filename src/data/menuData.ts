@@ -5,6 +5,7 @@ export const GOOGLE_SHEET_CSV_URL =
   import.meta.env.VITE_GOOGLE_SHEET_CSV_URL ||
   'https://docs.google.com/spreadsheets/d/e/2PACX-1vSKgAvHEDrDr-4Us5pNLEw6DDpdRdpYqZXHPpgoT311f0Algor5UkcM9GRk83mXsKSaVeNDO0cUDQQZ/pub?output=csv';
 
+// Articles par défaut SANS PRIX EN DUR (les prix viennent uniquement du Google Sheet en direct)
 export const DEFAULT_MENU_ITEMS: MenuItem[] = [
   // Café Caliente
   {
@@ -12,7 +13,7 @@ export const DEFAULT_MENU_ITEMS: MenuItem[] = [
     name: 'Americano',
     category: 'caliente',
     description: 'Expreso con granos 100% mexicanos de especialidad y agua caliente. Cuerpo balanceado con notas achocolatadas.',
-    price: '$35',
+    price: '',
     badge: 'Clásico'
   },
   {
@@ -20,7 +21,7 @@ export const DEFAULT_MENU_ITEMS: MenuItem[] = [
     name: 'Latte',
     category: 'caliente',
     description: 'Expreso doble con leche entera o deslactosada vaporizada y una fina capa de microespuma sedosa.',
-    price: '$48',
+    price: '',
     popular: true
   },
   {
@@ -28,7 +29,7 @@ export const DEFAULT_MENU_ITEMS: MenuItem[] = [
     name: 'Capuchino',
     category: 'caliente',
     description: 'La armonía tradicional de expreso aromático, leche vaporizada y abundante espuma aterciopelada.',
-    price: '$50',
+    price: '',
     badge: 'Favorito'
   },
   {
@@ -36,14 +37,14 @@ export const DEFAULT_MENU_ITEMS: MenuItem[] = [
     name: 'Moka',
     category: 'caliente',
     description: 'Café de especialidad fundido con cacao mexicano y leche texturizada. Reconfortante y aromático.',
-    price: '$55'
+    price: ''
   },
   {
     id: 'cal-chai',
     name: 'Chai Sugar Free',
     category: 'caliente',
     description: 'Mezcla artesanal de especias (cardamomo, canela, clavo) con leche caliente, libre de azúcares agregados.',
-    price: '$52',
+    price: '',
     badge: 'Sin Azúcar'
   },
 
@@ -53,7 +54,7 @@ export const DEFAULT_MENU_ITEMS: MenuItem[] = [
     name: 'Iced Coffee',
     category: 'fria',
     description: 'Café preparado al momento vertido sobre cubos de hielo. Fresco, limpio y perfecto para el calor de Veracruz.',
-    price: '$42',
+    price: '',
     badge: 'Refrescante'
   },
   {
@@ -61,14 +62,14 @@ export const DEFAULT_MENU_ITEMS: MenuItem[] = [
     name: 'Latte Frío',
     category: 'fria',
     description: 'Doble shot de expreso servido sobre leche fría con hielo cristalino. Suave y revitalizante.',
-    price: '$50'
+    price: ''
   },
   {
     id: 'fria-latte-caramelo',
     name: 'Latte Caramelo Frío',
     category: 'fria',
     description: 'Café latte sobre hielo con un toque de jarabe de caramelo artesanal y notas tostadas.',
-    price: '$55',
+    price: '',
     popular: true,
     badge: 'Top Seller'
   },
@@ -77,14 +78,14 @@ export const DEFAULT_MENU_ITEMS: MenuItem[] = [
     name: 'Moka Latte Frío',
     category: 'fria',
     description: 'Café expreso, salsa de cacao selecto y leche bien fría batida suavemente.',
-    price: '$58'
+    price: ''
   },
   {
     id: 'fria-chai',
     name: 'Chai Frío Sugar Free',
     category: 'fria',
     description: 'Infusión especiada con leche fría y hielo, sin endulzantes calóricos. Ligera y deliciosa.',
-    price: '$52',
+    price: '',
     badge: 'Sin Azúcar'
   },
 
@@ -94,7 +95,7 @@ export const DEFAULT_MENU_ITEMS: MenuItem[] = [
     name: 'Frappé de Mazapán',
     category: 'frappe',
     description: 'Nuestra especialidad insignia. Cremoso frappé con auténtico dulce de cacahuate mexicano, coronado con lluvia de mazapán.',
-    price: '$65',
+    price: '',
     popular: true,
     badge: 'Especialidad Nuvé'
   },
@@ -103,7 +104,7 @@ export const DEFAULT_MENU_ITEMS: MenuItem[] = [
     name: 'Frappé de Oreo',
     category: 'frappe',
     description: 'Base cremosa con galletas Oreo trituradas, jarabe de chocolate y crema batida.',
-    price: '$65',
+    price: '',
     badge: 'Irresistible'
   },
   {
@@ -111,14 +112,14 @@ export const DEFAULT_MENU_ITEMS: MenuItem[] = [
     name: 'Frappé de Moka',
     category: 'frappe',
     description: 'Intenso café de especialidad licuado con chocolate y hielo estilo frozen.',
-    price: '$65'
+    price: ''
   },
   {
     id: 'frappe-nutella',
     name: 'Frappé de Nutella',
     category: 'frappe',
     description: 'Frappé ultra cremoso con generosa crema de avellanas con cacao y toque de café.',
-    price: '$68',
+    price: '',
     badge: 'Delicia'
   },
 
@@ -128,7 +129,7 @@ export const DEFAULT_MENU_ITEMS: MenuItem[] = [
     name: 'Rebanada de Torta de Elote',
     category: 'comer',
     description: 'Bien suave, húmeda y hecha con mucho amor. Receta tradicional casera con granos tiernos de maíz.',
-    price: '$45',
+    price: '',
     popular: true,
     badge: 'Hecho en Casa'
   },
@@ -137,7 +138,7 @@ export const DEFAULT_MENU_ITEMS: MenuItem[] = [
     name: 'Pay de Jamón con Queso',
     category: 'comer',
     description: 'Rebanada dorada de masa crujiente rellena de jamón selecto y abundante queso fundido.',
-    price: '$48',
+    price: '',
     badge: 'Salado Calientito'
   },
   {
@@ -145,7 +146,7 @@ export const DEFAULT_MENU_ITEMS: MenuItem[] = [
     name: 'Torta Nuvé',
     category: 'comer',
     description: 'Especialidad de la barra en pan baguette artesanal, ingredientes frescos preparados al momento.',
-    price: '$60',
+    price: '',
     badge: 'Para el Antojo'
   },
   {
@@ -153,7 +154,7 @@ export const DEFAULT_MENU_ITEMS: MenuItem[] = [
     name: 'Croissant Mantequilla',
     category: 'comer',
     description: 'Hojaldre ligero y crujiente con aroma a mantequilla dorada. Perfecto acompañamiento para tu latte.',
-    price: '$38'
+    price: ''
   }
 ];
 
@@ -162,25 +163,25 @@ export const DEFAULT_SPECIALTIES: SpecialtyItem[] = [
     name: 'Frappé de Mazapán',
     tag: 'Insignia Nuvé',
     desc: 'Cremoso, con auténtico dulce de cacahuate mexicano.',
-    price: '$65'
+    price: ''
   },
   {
     name: 'Torta de Elote Casera',
     tag: 'Receta de Hogar',
     desc: 'Bien suave, húmeda y hecha con mucho amor.',
-    price: '$45'
+    price: ''
   },
   {
     name: 'Pay de Jamón con Queso',
     tag: 'Salado Calientito',
     desc: 'Masa crujiente hojaldrada y queso fundido.',
-    price: '$48'
+    price: ''
   },
   {
     name: 'Latte Caramelo Frío',
     tag: 'Refrescante',
     desc: 'Espresso selecto, leche fría y caramelo artesanal.',
-    price: '$55'
+    price: ''
   }
 ];
 

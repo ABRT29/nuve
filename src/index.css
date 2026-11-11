@@ -469,6 +469,31 @@ button {
   white-space: nowrap;
 }
 
+/* Carré opaque de chargement pour les prix */
+.price-skeleton {
+  width: 48px;
+  height: 24px;
+  border-radius: 6px;
+  background-color: #E8DFD3;
+  animation: pulseSkeleton 1.4s ease-in-out infinite;
+  flex-shrink: 0;
+}
+
+.price-skeleton-sm {
+  width: 40px;
+  height: 20px;
+  border-radius: 5px;
+  background-color: #E8DFD3;
+  animation: pulseSkeleton 1.4s ease-in-out infinite;
+  display: inline-block;
+  flex-shrink: 0;
+}
+
+@keyframes pulseSkeleton {
+  0%, 100% { opacity: 0.55; }
+  50% { opacity: 0.95; }
+}
+
 /* Especialidades Card */
 .specialties-card {
   background-color: var(--card-bg);

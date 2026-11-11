@@ -20,41 +20,16 @@ import { MenuItem, SpecialtyItem } from './types';
 import { DEFAULT_MENU_ITEMS, DEFAULT_SPECIALTIES, CAFE_INFO, GOOGLE_SHEET_CSV_URL } from './data/menuData';
 import { fetchMenuFromGoogleSheet } from './utils/sheetLoader';
 
-const CACHE_MENU_KEY = 'nuve_menu_cache_v1';
-const CACHE_SPEC_KEY = 'nuve_spec_cache_v1';
-
-// Récupération instantanée du cache local pour éviter le clignotement de l'ancien prix
-const getInitialMenu = (): MenuItem[] => {
-  try {
-    const cached = localStorage.getItem(CACHE_MENU_KEY);
-    if (cached) {
-      const parsed = JSON.parse(cached);
-      if (Array.isArray(parsed) && parsed.length > 0) return parsed;
-    }
-  } catch {}
-  return DEFAULT_MENU_ITEMS;
-};
-
-const getInitialSpecialties = (): SpecialtyItem[] => {
-  try {
-    const cached = localStorage.getItem(CACHE_SPEC_KEY);
-    if (cached) {
-      const parsed = JSON.parse(cached);
-      if (Array.isArray(parsed) && parsed.length > 0) return parsed;
-    }
-  } catch {}
-  return DEFAULT_SPECIALTIES;
-};
-
 export const App: React.FC = () => {
   const [isOpenNow, setIsOpenNow] = useState<boolean>(true);
   const [menuOpen, setMenuOpen] = useState(false);
   const [activeCategory, setActiveCategory] = useState<'caliente' | 'fria' | 'frappe' | 'comer'>('caliente');
   const [copied, setCopied] = useState(false);
 
-  // Menu & Spécialités (démarrage instantané depuis le cache local)
-  const [menuItems, setMenuItems] = useState<MenuItem[]>(getInitialMenu);
-  const [specialties, setSpecialties] = useState<SpecialtyItem[]>(getInitialSpecialties);
+  // ZÉRO PRIX EN DUR : départ vide ou squelette opaque, alimenté uniquement par le Google Sheet
+  const [menuItems, setMenuItems] = useState<MenuItem[]>(DEFAULT_MENU_ITEMS);
+  const [specialties, setSpecialties] = useState<SpecialtyItem[]>(DEFAULT_SPECIALTIES);
+  const [isPricesLoaded, setIsPricesLoaded] = useState<boolean>(false);
 
   // 1. Calcul dynamique Veracruz (UTC-6)
   useEffect(() => {
@@ -75,7 +50,7 @@ export const App: React.FC = () => {
     return () => clearInterval(interval);
   }, []);
 
-  // 2. Synchronisation arrière-plan Google Sheet + mise à jour du cache
+  // 2. Chargement direct des prix depuis Google Sheet
   useEffect(() => {
     if (!GOOGLE_SHEET_CSV_URL) return;
 
@@ -83,16 +58,11 @@ export const App: React.FC = () => {
       if (result) {
         if (result.menu.length > 0) {
           setMenuItems(result.menu);
-          try {
-            localStorage.setItem(CACHE_MENU_KEY, JSON.stringify(result.menu));
-          } catch {}
         }
         if (result.specialties.length > 0) {
           setSpecialties(result.specialties);
-          try {
-            localStorage.setItem(CACHE_SPEC_KEY, JSON.stringify(result.specialties));
-          } catch {}
         }
+        setIsPricesLoaded(true);
       }
     });
   }, []);
@@ -290,7 +260,12 @@ export const App: React.FC = () => {
                   </div>
                   <p className="item-desc">{item.description}</p>
                 </div>
-                <div className="item-price">{item.price}</div>
+                {/* Carré opaque de chargement tant que le prix n'est pas reçu de Google Sheet */}
+                {isPricesLoaded && item.price ? (
+                  <div className="item-price">{item.price}</div>
+                ) : (
+                  <div className="price-skeleton" aria-label="Cargando precio" />
+                )}
               </div>
             ))}
           </div>
@@ -308,7 +283,12 @@ export const App: React.FC = () => {
               <div key={idx} className="specialty-item">
                 <div className="specialty-top">
                   <span className="specialty-name">{spec.name}</span>
-                  <span className="specialty-price">{spec.price}</span>
+                  {/* Carré opaque de chargement pour les spécialités */}
+                  {isPricesLoaded && spec.price ? (
+                    <span className="specialty-price">{spec.price}</span>
+                  ) : (
+                    <span className="price-skeleton-sm" aria-label="Cargando precio" />
+                  )}
                 </div>
                 <span className="specialty-tag">{spec.tag}</span>
                 <p className="specialty-desc">{spec.desc}</p>
