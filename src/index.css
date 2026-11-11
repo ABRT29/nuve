@@ -5,8 +5,8 @@
   --surface-cream: #F9F6F0;
   --border-cream: #E8E0D5;
   
-  --espresso-dark: #1A0E08;
-  --espresso-main: #24140D;
+  --espresso-dark: #1E120D;
+  --espresso-main: #2A1810;
   --espresso-soft: #5C4538;
   --espresso-light: #8A7367;
   
@@ -57,16 +57,7 @@ button {
   min-height: 100vh;
 }
 
-/* BANDEAU EN HAUT MARRON FONCÉ (STICKY) */
-.top-bandeau-wrapper {
-  position: sticky;
-  top: 0;
-  z-index: 100;
-  background-color: var(--espresso-main);
-  box-shadow: 0 4px 18px rgba(26, 14, 8, 0.2);
-}
-
-/* 1. Barre de statut Veracruz (STRICTEMENT SUR UNE SEULE LIGNE) */
+/* 1. SEUL BANDEAU MARRON FONCÉ : statut d'ouverture dynamique */
 .top-status-bar {
   background-color: var(--espresso-dark);
   color: #EFE8DD;
@@ -96,9 +87,14 @@ button {
   text-overflow: ellipsis;
 }
 
-/* 2. Header marron foncé */
+/* 2. Barre avec logo, nom et hamburger INTACTE (teinte claire d'origine) */
 .main-header {
-  background-color: var(--espresso-main);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background-color: rgba(245, 239, 235, 0.96);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border-cream);
 }
 
 .header-container {
@@ -125,36 +121,38 @@ button {
   width: 44px;
   height: 44px;
   border-radius: 12px;
-  background-color: rgba(255, 255, 255, 0.08);
-  border: 1px solid rgba(255, 255, 255, 0.15);
+  background-color: var(--card-bg);
+  border: 1px solid var(--border-cream);
+  color: var(--caramel);
   display: flex;
   align-items: center;
   justify-content: center;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
   transition: all 0.2s;
   -webkit-tap-highlight-color: transparent;
 }
 
 .header-instagram-btn:active {
   transform: scale(0.94);
-  background-color: rgba(255, 255, 255, 0.18);
 }
 
 .hamburger-btn {
   width: 44px;
   height: 44px;
   border-radius: 12px;
-  background-color: rgba(255, 255, 255, 0.08);
-  border: 1px solid rgba(255, 255, 255, 0.15);
+  background-color: var(--card-bg);
+  border: 1px solid var(--border-cream);
+  color: var(--espresso-main);
   display: flex;
   align-items: center;
   justify-content: center;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
   transition: all 0.2s;
   -webkit-tap-highlight-color: transparent;
 }
 
 .hamburger-btn:active {
   transform: scale(0.94);
-  background-color: rgba(255, 255, 255, 0.18);
 }
 
 /* 3. Fullscreen Hamburger Menu */
@@ -164,8 +162,8 @@ button {
   width: 100vw;
   height: 100vh;
   height: 100dvh;
-  background-color: var(--espresso-main);
-  color: #FFFDF9;
+  background-color: #F7F4EE;
+  color: var(--espresso-main);
   z-index: 99999;
   display: flex;
   flex-direction: column;
@@ -185,22 +183,22 @@ button {
   align-items: center;
   justify-content: space-between;
   padding-bottom: 1rem;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+  border-bottom: 1px solid var(--border-cream);
 }
 
 .close-menu-btn {
-  color: #FFFDF9;
+  color: var(--espresso-main);
   padding: 0.45rem;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: rgba(255, 255, 255, 0.1);
+  background-color: rgba(42, 24, 16, 0.06);
   transition: all 0.2s;
 }
 
 .close-menu-btn:active {
-  background-color: rgba(255, 255, 255, 0.25);
+  background-color: rgba(42, 24, 16, 0.15);
 }
 
 .fullscreen-nav {
@@ -217,10 +215,10 @@ button {
   font-family: var(--font-serif);
   font-size: 1.55rem;
   font-weight: 600;
-  color: #FFFDF9;
+  color: var(--espresso-main);
   text-align: left;
   padding: 0.85rem 0;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  border-bottom: 1px solid var(--border-cream);
   transition: color 0.2s;
   -webkit-tap-highlight-color: transparent;
 }
@@ -261,9 +259,9 @@ button {
 }
 
 .btn-gps {
-  background-color: var(--caramel);
-  color: #FFFFFF;
-  box-shadow: 0 4px 14px rgba(196, 124, 73, 0.3);
+  background-color: var(--espresso-main);
+  color: #FFFDF9;
+  box-shadow: 0 4px 14px rgba(42, 24, 16, 0.15);
 }
 
 .btn-whatsapp {
@@ -275,10 +273,10 @@ button {
 .fullscreen-footer {
   text-align: center;
   font-size: 0.78rem;
-  color: rgba(255, 255, 255, 0.6);
+  color: var(--espresso-light);
   line-height: 1.5;
   padding-top: 1rem;
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  border-top: 1px solid var(--border-cream);
 }
 
 /* Main Single-Column Content */

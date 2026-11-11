@@ -86,64 +86,61 @@ export const App: React.FC = () => {
 
   return (
     <div className="nuve-layout">
-      {/* BANDEAU EN HAUT MARRON FONCÉ (Sticky) */}
-      <div className="top-bandeau-wrapper">
-        {/* Barre de statut tenant strictement sur une seule ligne */}
-        <div className="top-status-bar">
-          <Heart
-            size={13}
-            color={isOpenNow ? '#22C55E' : '#EF4444'}
-            fill={isOpenNow ? '#22C55E' : '#EF4444'}
-            className="status-heart"
-          />
-          <span className="status-text">
-            {isOpenNow
-              ? '¡Listos para recibirte! • Abierto hasta 8:00 PM'
-              : 'Cerrado por ahora • Abre a las 8:00 AM'}
-          </span>
-        </div>
-
-        {/* Header avec Logo + Instagram + Hamburger dans le bandeau marron */}
-        <header className="main-header">
-          <div className="container header-container">
-            <a href="#" className="header-logo">
-              <NuveLogo variant="horizontal" size={38} light={true} />
-            </a>
-
-            <div className="header-actions">
-              <a
-                href={CAFE_INFO.instagramUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="header-instagram-btn"
-                aria-label="Instagram @nuve_cafe"
-              >
-                <InstagramIcon size={20} color="#C47C49" />
-              </a>
-
-              <button
-                onClick={() => setMenuOpen(true)}
-                className="hamburger-btn"
-                aria-label="Abrir menú"
-              >
-                <Menu size={26} color="#FFFDF9" />
-              </button>
-            </div>
-          </div>
-        </header>
+      {/* 1. SEUL BANDEAU MARRON FONCÉ : statut d'ouverture dynamique */}
+      <div className="top-status-bar">
+        <Heart
+          size={13}
+          color={isOpenNow ? '#22C55E' : '#EF4444'}
+          fill={isOpenNow ? '#22C55E' : '#EF4444'}
+          className="status-heart"
+        />
+        <span className="status-text">
+          {isOpenNow
+            ? '¡Listos para recibirte! • Abierto hasta 8:00 PM'
+            : 'Cerrado por ahora • Abre a las 8:00 AM'}
+        </span>
       </div>
 
-      {/* Fullscreen Hamburger Menu Overlay */}
+      {/* 2. Barre avec logo, nom et hamburger INTACTE (teinte claire d'origine) */}
+      <header className="main-header">
+        <div className="container header-container">
+          <a href="#" className="header-logo">
+            <NuveLogo variant="horizontal" size={38} />
+          </a>
+
+          <div className="header-actions">
+            <a
+              href={CAFE_INFO.instagramUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="header-instagram-btn"
+              aria-label="Instagram @nuve_cafe"
+            >
+              <InstagramIcon size={20} color="#C47C49" />
+            </a>
+
+            <button
+              onClick={() => setMenuOpen(true)}
+              className="hamburger-btn"
+              aria-label="Abrir menú"
+            >
+              <Menu size={26} color="#2A1810" />
+            </button>
+          </div>
+        </div>
+      </header>
+
+      {/* 3. Fullscreen Hamburger Menu Overlay */}
       {menuOpen && (
         <div className="fullscreen-menu">
           <div className="fullscreen-menu-header">
-            <NuveLogo variant="horizontal" size={36} light={true} />
+            <NuveLogo variant="horizontal" size={36} />
             <button
               onClick={() => setMenuOpen(false)}
               className="close-menu-btn"
               aria-label="Cerrar menú"
             >
-              <X size={28} color="#FFFDF9" />
+              <X size={28} color="#2A1810" />
             </button>
           </div>
 
@@ -193,9 +190,9 @@ export const App: React.FC = () => {
         </div>
       )}
 
-      {/* Main Single-Column Content (Directement sur la carte sans intro préalable) */}
+      {/* Main Single-Column Content */}
       <main className="content-container">
-        {/* Le Menu Express (Version 2 layout: tabs + clean rows) */}
+        {/* Le Menu Express */}
         <section id="carta" className="menu-card">
           <div className="menu-header">
             <h2>La Carta</h2>
